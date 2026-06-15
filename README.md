@@ -70,33 +70,29 @@ Removed from the portfolio version:
 
 
 
-\## Main modules
+## Main modules
+
+- `src/bc_paths.py` — centralized path constants for all runtime directories and CSV files
+- `src/gui_app_v2.py` — main Tkinter GUI desktop entry point; orchestrates the full AI generation + Playwright automation pipeline
+- `src/openai_helper.py` — OpenAI API integration; generates company identities via GPT-4o-mini and images (avatar / logo / banner) via gpt-image-1
+- `src/manual_runner.py` — secondary GUI for manually triggering individual automation scripts (register, fill profile, fill company step 1 & 2)
+- `src/fix_runtime_pkg.py` — utility to backfill missing `_runtime_pkg` folders in the output directory
+- `src/register.py` — Playwright automation: registers new user accounts on the portal
+- `src/fill_profile.py` — Playwright automation: fills user profile (bio, country, city, avatar upload)
+- `src/fill_company.py` — Playwright automation: creates a company entry (name, address, category, logo, banner)
+- `src/fill_company_step2.py` — Playwright automation: second-step company completion (map pin, description, plan upgrade)
+- `src/company_registry.py` — local JSON registry tracking uploaded companies and preventing duplicates
+- `src/input_package_generator/` — converts identity + expansion JSON into ready-to-use CSV + image packages
+- `src/input_package_generator/Asystent Paczek/` — semi-automatic Package Assistant (Polish: *asystent paczek*); step-by-step GUI wizard for building packages manually with AI prompt helpers
+- `src/BC_Launcher.spec` — PyInstaller spec for building the Windows `BC_Launcher.exe` desktop executable
+- `src/Fillator2077.iss` — Inno Setup script for packaging `BC_Launcher.exe` into a Windows installer (`Fillator2077_Setup.exe`)
 
 
 
-\- `src/fill\_profile.py` — user profile automation
-
-\- `src/fill\_company.py` — company creation automation
-
-\- `src/fill\_company\_step2.py` — second-step company flow
-
-\- `src/company\_registry.py` — local registry/status helper
-
-\- `src/input\_package\_generator/` — input package generator
-
-\- `src/input\_package\_generator/Asystent Paczek/` — semi-automatic package assistant
-
-
-
-\## Demo data
-
-
+## Demo data
 
 Safe sample files are in:
 
-
-
 ```text
-
 examples/
-
+```

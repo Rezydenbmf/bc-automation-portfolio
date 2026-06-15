@@ -33,6 +33,13 @@ storage_state*.json
 *session*.json
 audit_*.txt
 
+# build / installer artifacts (may contain absolute local paths)
+# The two portfolio files below are explicitly tracked via negation rules.
+*.spec
+*.iss
+!src/BC_Launcher.spec
+!src/Fillator2077.iss
+
 *.png
 *.jpg
 *.jpeg
