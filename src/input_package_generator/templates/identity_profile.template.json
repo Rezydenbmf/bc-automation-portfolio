@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "reference_context": {
+    "reference_company_name": "Microsoft",
+    "reference_person_name": "Satya Nadella",
+    "reference_person_role": "CEO",
+    "reference_person_image": "satya_nadella_reference.jpg",
+    "reference_logo_source": "microsoft_reference_logo.png"
+  },
+  "identity": {
+    "first_name": "Satya",
+    "last_name": "Nadella",
+    "bio": "Global technology executive leading enterprise innovation and digital transformation.",
+    "country": "United States",
+    "city": "Redmond",
+    "password": "DemoPass123!"
+  },
+  "brand": {
+    "base_brand_name": "Microsoft",
+    "company_prefix": "MIC",
+    "company_description": "Global technology and business solutions provider supporting international clients."
+  },
+  "assets": {
+    "avatar_filename": "identity_001_avatar.png",
+    "avatar_generation_brief": "Professional executive portrait inspired by a real technology CEO, clean business background, realistic corporate headshot.",
+    "logo_filename": "identity_001_logo.png",
+    "logo_generation_brief": "Professional corporate technology logo inspired by a major global software company, clean, modern, business-ready.",
+    "banner_filename": "identity_001_banner.png",
+    "banner_generation_brief": "Professional technology company banner, modern office-business style, suitable for a corporate business profile."
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "generation_rules": {
+    "target_company_count": 3,
+    "maximize_country_diversity": true,
+    "maximize_city_diversity": true,
+    "use_realistic_business_addresses": true,
+    "use_realistic_coordinates": true,
+    "auto_select_categories": true
+  },
+  "companies": [
+    {
+      "company_name": "Microsoft",
+      "country": "United States",
+      "city": "Redmond",
+      "postal_code": "98052",
+      "street": "One Microsoft Way",
+      "apartment_number": "1",
+      "latitude": 47.6396,
+      "longitude": -122.1281,
+      "main_category": "Information Technology",
+      "subcategory": "Software and Cloud Services"
+    },
+    {
+      "company_name": "Microsoft Germany",
+      "country": "Germany",
+      "city": "Munich",
+      "postal_code": "80807",
+      "street": "Walter-Gropius-Straße",
+      "apartment_number": "5",
+      "latitude": 48.1861,
+      "longitude": 11.6084,
+      "main_category": "Information Technology",
+      "subcategory": "Software and Cloud Services"
+    },
+    {
+      "company_name": "Microsoft France",
+      "country": "France",
+      "city": "Paris",
+      "postal_code": "92130",
+      "street": "Avenue Victor Hugo",
+      "apartment_number": "37",
+      "latitude": 48.8323,
+      "longitude": 2.2788,
+      "main_category": "Information Technology",
+      "subcategory": "Software and Cloud Services"
+    }
+  ]
+}

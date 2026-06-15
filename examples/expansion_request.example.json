@@ -1,0 +1,10 @@
+﻿{
+  "base_company_name": "Demo Automation Ltd",
+  "requested_companies": [
+    {
+      "company_name": "Demo Automation USA",
+      "country": "United States of America",
+      "city": "New York"
+    }
+  ]
+}
