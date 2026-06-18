@@ -36,6 +36,12 @@ This repository is intended to show:
 
 
 
+## Portfolio case studies
+
+- [CSV Multiline Content Approval Fix](CASE_STUDY_CSV_MULTILINE_CONTENT_APPROVAL_FIX.md)
+
+
+
 \## Security
 
 
