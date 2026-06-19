@@ -40,6 +40,7 @@ This repository is intended to show:
 
 - [CSV Multiline Content Approval Fix](CASE_STUDY_CSV_MULTILINE_CONTENT_APPROVAL_FIX.md)
 - [AI Content Quality Gate For A Supervised Campaign MVP](CASE_STUDY_AI_CONTENT_QUALITY_GATE.md)
+- [Supervised Content Run 002](CASE_STUDY_SUPERVISED_CONTENT_RUN_002.md)
 
 
 
