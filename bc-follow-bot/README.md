@@ -1,0 +1,113 @@
+# BC Follow Bot
+
+A local Windows 11 automation tool for controlled internal portal activity: follow automation, profile discovery, and a full supervised AI content publishing pipeline — all built on TypeScript, Node.js, and Playwright.
+
+## What it does
+
+BC Follow Bot automates three distinct, independently gated workflows on an authorized internal business portal:
+
+**1. Follow automation**
+Logs into multiple accounts, navigates to person profiles by URL, clicks Follow, and classifies the result (`followed` / `already_following` / `not_found` / `login_failed` / `follow_failed`). Skips company pages. Maintains a local action-history file to avoid repeating already-processed targets. Exports structured CSV results per run.
+
+**2. Supervised AI content pipeline**
+Generates post drafts via an OpenAI-compatible API, then walks the operator through a multi-stage approval flow before publishing anything:
+
+```
+AI draft generation → human approval CSV → approval review → publish plan
+  → browser dry-run → manual-confirm publish (two explicit confirmations)
+  → private run audit
+```
+
+No content is published without human sign-off at every gate. The two final confirmations (`PUBLISH_CONTENT_YES` and `FINAL_PUBLISH_YES`) must be typed manually at the terminal.
+
+**3. Profile discovery**
+Searches for person profiles on the portal and exports found profile URLs as a target list for the follow run.
+
+## Key features
+
+- **Defensive browser automation** — checks page state before acting, handles missing or changed selectors gracefully, logs all UI differences
+- **Strict approval gates** — generated content cannot reach publishing without explicit human approval at every stage; `pending`, `rejected`, and `needs_changes` records are blocked
+- **Per-run and per-account limits** — configurable safety caps enforced before any browser action; large runs require a typed `YES` to proceed
+- **Local action history** — skips already-followed targets; avoids duplicating successful work
+- **Audit trail** — every run exports structured CSV results; a private local file tracks real publish history for scale decisions
+- **Campaign input review** — pre-flight check for 5-10 record supervised campaigns before AI API calls are made
+
+## Tech stack
+
+| Layer | Technology |
+|-------|-----------|
+| Language | TypeScript 5 |
+| Runtime | Node.js |
+| Browser automation | Playwright |
+| AI drafts | OpenAI-compatible REST API (local key only, never committed) |
+| Data | CSV inputs/outputs, JSON config |
+| Build | `tsc` → `dist/` |
+
+## How to run
+
+```powershell
+# 1. Install dependencies
+npm install
+
+# 2. Copy example files to local config (excluded from Git)
+Copy-Item config\appsettings.example.json config\appsettings.json
+Copy-Item data\accounts.example.csv data\accounts.csv
+Copy-Item data\targets.example.csv data\targets.csv
+
+# 3. Build
+npm run build
+
+# 4. Follow run
+npm start
+
+# 5. Discovery
+npm run discovery
+```
+
+### AI content pipeline
+
+```powershell
+npm run content:generate:drafts        # generate drafts via AI API
+npm run content:approval:review        # review operator-approved CSV
+npm run content:publish:plan           # build publish plan (gated)
+npm run content:publish:browser-dry-run  # verify targets without publishing
+npm run content:publish:manual-confirm   # publish one post after two confirmations
+```
+
+### Supervised campaign
+
+```powershell
+npm run content:campaign:review        # pre-flight input check, no API/browser
+npm run content:audit:review           # review local private audit history
+```
+
+## Project structure
+
+```
+src/
+  auth/          Login flow with robust email/password field handling
+  bootstrap/     Startup validation and run gating
+  content/       Full AI content pipeline (15 modules)
+  discovery/     Profile search, matching, and target export
+  follow/        Follow action with result classification
+  input/         CSV and config loading with strict validation
+  runner/        Orchestration, preflight checks, result export
+  search/        Profile navigation and page classification
+  logs/          Structured file logging
+  shared/        Shared types, config, CSV utilities
+  state/         Local profile action history
+test/            26 unit test suites (.cjs, Node built-in assert)
+```
+
+## Case studies
+
+Two engineering case studies from this project are documented in the companion `bc-automation-portfolio` repository:
+
+- **CSV multiline approval fix** — handling multi-line `approved_text` fields across the approval → plan → publish pipeline without breaking row integrity
+- **AI content quality gate** — systematic evaluation of AI-generated post drafts before supervised publishing: what "usable" means in practice
+
+## Portfolio note
+
+This is a sanitized snapshot. Real portal URLs, account credentials, operator-specific data, and production configuration have been replaced with safe examples. The application is built for local, single-operator, authorized internal use on a specific business portal — not for mass automation or public deployment.
+
+Security model: real secrets live only in local `.env` and `config/appsettings.json` (both Git-ignored). No credentials are committed. The AI API key is read from `CONTENT_AI_DRAFT_API_KEY` in `.env`.

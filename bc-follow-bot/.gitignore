@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local secrets and private config — never commit these
+.env
+config/appsettings.json
+
+# Private runtime data
+data/accounts.csv
+data/targets.csv
+data/discovery-input.csv
+data/content-*.csv
+data/content-run-audit.csv
+data/state/
+
+# Logs and run output
+logs/
+*.log
+live-run.log
+run.log
+
+# OS
+.DS_Store
+Thumbs.db

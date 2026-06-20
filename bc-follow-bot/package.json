@@ -1,0 +1,30 @@
+{
+  "name": "bc-follow-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local Windows 11 TypeScript + Node.js + Playwright scaffolding for internal portal automation.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "start:chrome": "set PLAYWRIGHT_BROWSER_CHANNEL=chrome&& npm start",
+    "discovery": "node dist/discovery/discoveryCli.js",
+    "content:dry-run": "node dist/content/contentDryRunCli.js",
+    "content:approval:review": "node dist/content/contentApprovalReviewCli.js",
+    "content:publish:plan": "node dist/content/contentPublishPlanCli.js",
+    "content:publish:browser-dry-run": "node dist/content/contentBrowserDryRunCli.js",
+    "content:publish:manual-confirm": "node dist/content/contentManualPublishCli.js",
+    "content:audit:review": "node dist/content/contentRunAuditReviewCli.js",
+    "content:campaign:review": "node dist/content/contentCampaignInputReviewCli.js",
+    "content:generate:drafts": "node dist/content/contentAiDraftGenerateCli.js",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "playwright": "^1.54.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
