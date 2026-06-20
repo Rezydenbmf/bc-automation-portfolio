@@ -65,8 +65,13 @@ This proves supervised MVP usability for one manually approved post. It does
 not prove scale readiness.
 
 Scaling remains blocked until there is more language-quality confidence and more
-audit history. The AI draft also still produced blank paragraph spacing inside
-`draft_text`, so draft formatting remains part of manual review.
+audit history.
+
+A follow-up quality-gate update addressed the formatting issue seen in this run:
+AI `draft_text` is now normalized before approval export, empty or
+whitespace-only paragraphs are cleaned up, and uncertain or suspicious language
+is marked for human review with safe metadata fields. Approval is still manual,
+and the publish limit remains max 1 post per run.
 
 ## Outcome
 
