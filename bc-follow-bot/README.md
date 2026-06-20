@@ -28,6 +28,7 @@ Searches for person profiles on the portal and exports found profile URLs as a t
 - **Defensive browser automation** — checks page state before acting, handles missing or changed selectors gracefully, logs all UI differences
 - **Strict approval gates** — generated content cannot reach publishing without explicit human approval at every stage; `pending`, `rejected`, and `needs_changes` records are blocked
 - **Draft normalization and language QA flags** — AI draft text is cleaned before approval export, and uncertain or suspicious language is marked for human review
+- **Real supervised run evidence** — one public-safe status update records a real one-post run where language QA passed, empty paragraph cleanup held, manual publish succeeded, and the portal result was manually verified
 - **Per-run and per-account limits** — configurable safety caps enforced before any browser action; large runs require a typed `YES` to proceed
 - **Local action history** — skips already-followed targets; avoids duplicating successful work
 - **Audit trail** — every run exports structured CSV results; a private local file tracks real publish history for scale decisions
@@ -107,6 +108,7 @@ Two engineering case studies from this project are documented in the companion `
 - **CSV multiline approval fix** — handling multi-line `approved_text` fields across the approval → plan → publish pipeline without breaking row integrity
 - **AI content quality gate** — systematic evaluation of AI-generated post drafts before supervised publishing: what "usable" means in practice
 - **Draft normalization and language review flags** — cleaning empty draft paragraphs and marking uncertain language before human approval
+- **Supervised content run status** — a real one-post supervised run passed language QA, kept human approval mandatory, published only after manual confirmation, and was manually verified in the portal
 
 ## Portfolio note
 

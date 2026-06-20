@@ -26,6 +26,7 @@ Automates engagement and AI-assisted content operations on the portal, with a st
 - Batch-follows profiles across multiple accounts with per-account rate limits, skip-existing logic, and a full audit trail (CSV-driven)
 - Generates AI content drafts via the OpenAI API, routes them through human CSV approval, and gates any publish action behind a dry-run step plus two typed confirmations
 - Normalizes AI draft text before approval export and flags uncertain or suspicious language for human review
+- Has passed a real one-post supervised content run with language QA, draft normalization, human approval, manual publish, and portal verification
 - Ships with 24 test suites covering core logic and edge cases
 - Clean TypeScript build with strict types throughout
 
@@ -39,7 +40,7 @@ Short write-ups of real problems encountered during development:
 
 - [CSV Multiline Content Approval Fix](CASE_STUDY_CSV_MULTILINE_CONTENT_APPROVAL_FIX.md) — diagnosed and fixed a silent data-corruption bug caused by unescaped newlines breaking CSV parsing in the content approval pipeline
 - [AI Content Quality Gate](CASE_STUDY_AI_CONTENT_QUALITY_GATE.md) — shifted the supervised content workflow from "does it technically run?" to "is the AI output actually good enough to approve?", with later draft normalization and language-review flags before human approval
-- [Supervised Content Run 002](CASE_STUDY_SUPERVISED_CONTENT_RUN_002.md) — end-to-end verification that the full human-gated content workflow completes reliably for a single manually approved post
+- [Supervised Content Run 002](CASE_STUDY_SUPERVISED_CONTENT_RUN_002.md) — end-to-end verification that the full human-gated content workflow completes reliably for a single manually approved post, with a later language-QA run confirming normalized drafts and manual portal verification
 
 ## Portfolio Note
 

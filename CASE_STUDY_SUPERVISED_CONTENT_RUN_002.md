@@ -46,6 +46,24 @@ unknown_result = 0
 
 The operator later verified that the Dutch language quality was acceptable.
 
+## Follow-up Run With Language QA
+
+A later one-post supervised run repeated the same human-gated path after draft
+normalization and language QA were added.
+
+Public-safe result:
+
+- language QA passed,
+- empty paragraph cleanup held in practice,
+- human approval remained mandatory,
+- manual publish succeeded after operator confirmation,
+- the post was manually verified in the portal,
+- the private audit was updated.
+
+The public case study does not include the published text, real profile URL,
+private CSV contents, logs, account data, secrets, API keys, screenshots, or
+local configuration.
+
 ## Safety Boundaries
 
 This run did not change the safety model:
@@ -66,6 +84,10 @@ not prove scale readiness.
 
 Scaling remains blocked until there is more language-quality confidence and more
 audit history.
+
+The follow-up language-QA run improved the evidence for the supervised MVP, but
+it still did not change the scale decision: scaling remains intentionally
+blocked until more clean audit history exists.
 
 A follow-up quality-gate update addressed the formatting issue seen in this run:
 AI `draft_text` is now normalized before approval export, empty or
