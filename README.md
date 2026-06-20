@@ -1,106 +1,47 @@
-\# BC Automation Portfolio
+# BC Portal Automation Suite
 
+**Two automation tools built for the Business Communicator portal**
 
+---
 
-Sanitized portfolio version of a Python desktop automation project.
+Business Communicator (`business-communicator.com`) is a B2B networking platform where companies create profiles, connect with partners, and publish content. These tools were built to automate the repetitive account-lifecycle and engagement workflows on that portal — tasks that would otherwise require hours of manual clicking per batch. This repository is a sanitized portfolio version: all real credentials, account data, and private URLs have been removed and replaced with environment variables and example files.
 
+## Tool 1: BC Automation (Python)
 
+Automates the full account lifecycle on the portal, from registration through a fully filled company profile.
 
-The original project automated a multi-step business portal workflow:
+- Registers new user accounts and fills user profiles (bio, avatar, location)
+- Creates company entries (name, logo, banner, description) and completes the second setup step (map pin, plan upgrade)
+- Generates company identities end-to-end using OpenAI — GPT-4o-mini for text, gpt-image-1 for images
+- Packages inputs for batch runs; ships as a Windows desktop app (GUI launcher built with tkinter, distributed via PyInstaller + Inno Setup)
 
-\- user registration,
+**Stack:** Python, Playwright, OpenAI API, tkinter, PyInstaller, Inno Setup
 
-\- user profile completion,
+Source: [`src/`](src/)
 
-\- company creation,
+## Tool 2: BC Follow Bot (TypeScript)
 
-\- second-step company completion,
+Automates engagement and AI-assisted content operations on the portal, with a strong emphasis on human oversight and auditability.
 
-\- input package preparation,
+- Batch-follows profiles across multiple accounts with per-account rate limits, skip-existing logic, and a full audit trail (CSV-driven)
+- Generates AI content drafts via the OpenAI API, routes them through human CSV approval, and gates any publish action behind a dry-run step plus two typed confirmations
+- Ships with 24 test suites covering core logic and edge cases
+- Clean TypeScript build with strict types throughout
 
-\- operator support and reporting helpers.
+**Stack:** TypeScript, Node.js, Playwright, OpenAI API
 
+Source: [`bc-follow-bot/`](bc-follow-bot/)
 
+## Case Studies
 
-This repository is intended to show:
+Short write-ups of real problems encountered during development:
 
-\- project structure,
+- [CSV Multiline Content Approval Fix](CASE_STUDY_CSV_MULTILINE_CONTENT_APPROVAL_FIX.md) — diagnosed and fixed a silent data-corruption bug caused by unescaped newlines breaking CSV parsing in the content approval pipeline
+- [AI Content Quality Gate](CASE_STUDY_AI_CONTENT_QUALITY_GATE.md) — shifted the supervised content workflow from "does it technically run?" to "is the AI output actually good enough to approve?", introducing a quality gate before human review
+- [Supervised Content Run 002](CASE_STUDY_SUPERVISED_CONTENT_RUN_002.md) — end-to-end verification that the full human-gated content workflow completes reliably for a single manually approved post
 
-\- modular automation design,
+## Portfolio Note
 
-\- validation logic,
+This is a sanitized portfolio version. Real credentials, portal URLs, approved post text, logs, browser state, cookies, and all account-identifying data have been stripped. Configuration is passed via environment variables (`.env`); safe example files are in [`examples/`](examples/).
 
-\- error handling approach,
-
-\- data preparation workflow.
-
-
-
-## Portfolio case studies
-
-- [CSV Multiline Content Approval Fix](CASE_STUDY_CSV_MULTILINE_CONTENT_APPROVAL_FIX.md)
-- [AI Content Quality Gate For A Supervised Campaign MVP](CASE_STUDY_AI_CONTENT_QUALITY_GATE.md)
-- [Supervised Content Run 002](CASE_STUDY_SUPERVISED_CONTENT_RUN_002.md)
-
-
-
-\## Security
-
-
-
-This is not the original working repository.
-
-
-
-Removed from the portfolio version:
-
-\- real user and company data,
-
-\- logs,
-
-\- generated packages,
-
-\- runtime workspace files,
-
-\- screenshots,
-
-\- browser state,
-
-\- cookies,
-
-\- tokens,
-
-\- `.env` files,
-
-\- private Git history,
-
-\- production URLs.
-
-
-
-## Main modules
-
-- `src/bc_paths.py` — centralized path constants for all runtime directories and CSV files
-- `src/gui_app_v2.py` — main Tkinter GUI desktop entry point; orchestrates the full AI generation + Playwright automation pipeline
-- `src/openai_helper.py` — OpenAI API integration; generates company identities via GPT-4o-mini and images (avatar / logo / banner) via gpt-image-1
-- `src/manual_runner.py` — secondary GUI for manually triggering individual automation scripts (register, fill profile, fill company step 1 & 2)
-- `src/fix_runtime_pkg.py` — utility to backfill missing `_runtime_pkg` folders in the output directory
-- `src/register.py` — Playwright automation: registers new user accounts on the portal
-- `src/fill_profile.py` — Playwright automation: fills user profile (bio, country, city, avatar upload)
-- `src/fill_company.py` — Playwright automation: creates a company entry (name, address, category, logo, banner)
-- `src/fill_company_step2.py` — Playwright automation: second-step company completion (map pin, description, plan upgrade)
-- `src/company_registry.py` — local JSON registry tracking uploaded companies and preventing duplicates
-- `src/input_package_generator/` — converts identity + expansion JSON into ready-to-use CSV + image packages
-- `src/input_package_generator/Asystent Paczek/` — semi-automatic Package Assistant (Polish: *asystent paczek*); step-by-step GUI wizard for building packages manually with AI prompt helpers
-- `src/BC_Launcher.spec` — PyInstaller spec for building the Windows `BC_Launcher.exe` desktop executable
-- `src/Fillator2077.iss` — Inno Setup script for packaging `BC_Launcher.exe` into a Windows installer (`Fillator2077_Setup.exe`)
-
-
-
-## Demo data
-
-Safe sample files are in:
-
-```text
-examples/
-```
+Both tools are under active development and continue to be extended.
