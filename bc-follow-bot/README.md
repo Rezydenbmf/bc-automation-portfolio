@@ -20,6 +20,8 @@ AI draft generation → human approval CSV → approval review → publish plan
 
 No content is published without human sign-off at every gate. The two final confirmations (`PUBLISH_CONTENT_YES` and `FINAL_PUBLISH_YES`) must be typed manually at the terminal.
 
+Before real manual publish, the MVP also runs a publish target preflight: the publish row must use `target_type=profile_url`, include a target profile URL, match the selected account context, and stay on the expected target URL after navigation when that signal is available. If the active portal profile cannot be fully verified automatically, the operator is warned to manually check the account/profile before final confirmation.
+
 **3. Profile discovery**
 Searches for person profiles on the portal and exports found profile URLs as a target list for the follow run.
 

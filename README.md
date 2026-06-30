@@ -27,6 +27,7 @@ Automates engagement and AI-assisted content operations on the portal, with a st
 - Generates AI content drafts via the OpenAI API, routes them through human CSV approval, and gates any publish action behind a dry-run step plus two typed confirmations
 - Normalizes AI draft text before approval export and flags uncertain or suspicious language for human review
 - Adds an operator batch draft preparation MVP: multiple profile-aware AI draft posts can be prepared for operator review while human approval, browser execution, and real publishing remain separated and controlled
+- Adds a publish target preflight before real manual publish: `profile_url` targets, account context, and current target URL are checked where available, with clear operator warnings when active portal identity still needs manual verification
 - Has passed real one-post supervised content runs, including a Stage 60 operator batch flow with AI draft generation, human review, approval CSV, publish plan, browser dry-run, manual publish, portal verification, and audit review
 - Ships with 24 test suites covering core logic and edge cases
 - Clean TypeScript build with strict types throughout
