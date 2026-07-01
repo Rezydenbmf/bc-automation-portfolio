@@ -1,6 +1,11 @@
 # BC Follow Bot
 
+**Status:** in development, actively extended
+
 A local Windows 11 automation tool for controlled internal portal activity: follow automation, profile discovery, and a full supervised AI content publishing pipeline — all built on TypeScript, Node.js, and Playwright.
+
+<!-- TODO: add a redacted screenshot or terminal output showing a real follow run
+     or the CSV approval flow. None currently exist in this repo. -->
 
 ## What it does
 
@@ -20,7 +25,7 @@ AI draft generation → human approval CSV → approval review → publish plan
 
 No content is published without human sign-off at every gate. The two final confirmations (`PUBLISH_CONTENT_YES` and `FINAL_PUBLISH_YES`) must be typed manually at the terminal.
 
-Before real manual publish, the MVP also runs a publish target preflight: the publish row must use `target_type=profile_url`, include a target profile URL, match the selected account context, and stay on the expected target URL after navigation when that signal is available. If the active portal profile cannot be fully verified automatically, the operator is warned to manually check the account/profile before final confirmation.
+Before real manual publish, a preflight check also runs: the publish row must use `target_type=profile_url`, include a target profile URL, match the selected account context, and stay on the expected target URL after navigation when that signal is available. If the active portal profile can't be fully verified automatically, the operator is warned to check the account/profile manually before final confirmation.
 
 **3. Profile discovery**
 Searches for person profiles on the portal and exports found profile URLs as a target list for the follow run.
@@ -30,22 +35,23 @@ Searches for person profiles on the portal and exports found profile URLs as a t
 - **Defensive browser automation** — checks page state before acting, handles missing or changed selectors gracefully, logs all UI differences
 - **Strict approval gates** — generated content cannot reach publishing without explicit human approval at every stage; `pending`, `rejected`, and `needs_changes` records are blocked
 - **Draft normalization and language QA flags** — AI draft text is cleaned before approval export, and uncertain or suspicious language is marked for human review
-- **Real supervised run evidence** — one public-safe status update records a real one-post run where language QA passed, empty paragraph cleanup held, manual publish succeeded, and the portal result was manually verified
 - **Per-run and per-account limits** — configurable safety caps enforced before any browser action; large runs require a typed `YES` to proceed
 - **Local action history** — skips already-followed targets; avoids duplicating successful work
 - **Audit trail** — every run exports structured CSV results; a private local file tracks real publish history for scale decisions
-- **Campaign input review** — pre-flight check for 5-10 record supervised campaigns before AI API calls are made
+- **Campaign input review** — pre-flight check for 5–10 record supervised campaigns before any AI API calls are made
+- **Incidental regression coverage** — not built as a test tool, but running this against the live portal UI has repeatedly surfaced real UI and integration bugs (changed selectors, broken flows) before they reached a supervised publish
 
 ## Tech stack
 
 | Layer | Technology |
 |-------|-----------|
-| Language | TypeScript 5 |
+| Language | TypeScript 5 (strict mode) |
 | Runtime | Node.js |
 | Browser automation | Playwright |
 | AI drafts | OpenAI-compatible REST API (local key only, never committed) |
 | Data | CSV inputs/outputs, JSON config |
 | Build | `tsc` → `dist/` |
+| Tests | 26 unit test suites (Node built-in `assert`, `.cjs`) |
 
 ## How to run
 
@@ -71,9 +77,9 @@ npm run discovery
 ### AI content pipeline
 
 ```powershell
-npm run content:generate:drafts        # generate drafts via AI API
-npm run content:approval:review        # review operator-approved CSV
-npm run content:publish:plan           # build publish plan (gated)
+npm run content:generate:drafts          # generate drafts via AI API
+npm run content:approval:review          # review operator-approved CSV
+npm run content:publish:plan             # build publish plan (gated)
 npm run content:publish:browser-dry-run  # verify targets without publishing
 npm run content:publish:manual-confirm   # publish one post after two confirmations
 ```
@@ -105,7 +111,7 @@ test/            26 unit test suites (.cjs, Node built-in assert)
 
 ## Case studies
 
-Two engineering case studies from this project are documented in the companion `bc-automation-portfolio` repository:
+Engineering case studies from this project are documented in the companion `bc-automation-portfolio` repository:
 
 - **CSV multiline approval fix** — handling multi-line `approved_text` fields across the approval → plan → publish pipeline without breaking row integrity
 - **AI content quality gate** — systematic evaluation of AI-generated post drafts before supervised publishing: what "usable" means in practice
