@@ -4,8 +4,8 @@
 
 A local Windows 11 automation tool for controlled internal portal activity: follow automation, profile discovery, and a full supervised AI content publishing pipeline — all built on TypeScript, Node.js, and Playwright.
 
-<!-- TODO: add a redacted screenshot or terminal output showing a real follow run
-     or the CSV approval flow. None currently exist in this repo. -->
+![Campaign review dry-run](screenshots/BC-Follow-bot-results.png)
+*`npm run content:campaign:review` against example CSV data — a safe, read-only pre-flight check. Row counts and publish-flow candidate IDs are computed with no API calls, no browser started, and no publishing executed. Local file path redacted.*
 
 ## What it does
 
